@@ -25,9 +25,12 @@ public class Client
 
        
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            
-            iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 30000);
 
+            //iep = new IPEndPoint(IPAddress.Parse("10.66.2.178"), 30000);
+
+            //iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 30000);
+            
+            iep = new IPEndPoint(IPAddress.Parse("10.67.164.45"), 30000);
             socket.Connect(iep);
 
 
@@ -36,13 +39,19 @@ public class Client
             jd["result"] = 4;
             byte[] jsbyte = Encoding.UTF8.GetBytes(jd.ToString());
 
-            socket.Send(jdbyte);
+            socket.Send(jsbyte);
 
 
+            JsonData jdl = new JsonData();
+            jdl["code"] = 2;
+            jdl["result"] = "你好,我是客户端";
+            jsbyte = Encoding.UTF8.GetBytes(jd.ToString());
+
+            socket.Send(jsbyte);
             while(true)
             {
                 Thread.Sleep(1000);
-                socket.Send(bytes);
+                socket.Send(jsbyte);
       
             }
 
